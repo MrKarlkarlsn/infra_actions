@@ -33,3 +33,7 @@ jobs:
       run: |
         # запуск проверки проекта по flake8
         python -m flake8
+        # переход к файлу manage.py
+        cd infra_project
+        # Запуск тестов от разработчика
+        python manage.py test
