@@ -69,12 +69,10 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 158.160.56.240
-          username: mr_karl
-          key: AAAAB3NzaC1yc2EAAAADAQABAAABAQDOReJqzvKeNQ8EEuGU/1r5Z1H0mWKBROW5bSQ/TGngKLF/N0IlGZUPG60hSeCU8EGqMNa4cyAvPVrqa5fIHqIJQYjau4krcUr806bEZD4OxF/1/GCLey69EpZ/NVjAODuSAi7HOVfKnZgdbGdGZqZKRLiRTQQPvhS3HaH1QpL7nSXjTn1cDPii/OJ2+kKE0WRSvIfNo6L7a62gKBKwe2B/vjmnM1AVw2h29lI0175KsY5TSinZXf3UWQK+IkQ4UKVWsKIuy3G70Fj9s2xoA52E7pc3pqwXvhfrS8DOmj7fS1q9NSE5/eOD5j5UDI5Qr/1Faq6SNbjSF+YrLrN/uf/t mac@MacBook-Mac-2.local
-          passphrase: 5145579 # Если ваш ssh-ключ защищён фразой-паролем
+          username: ${{ secrets.USER_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }} # Если ваш ssh-ключ защищён фразой-паролем
           script: |
-            # Выполняет pull образа с DockerHub
             sudo docker pull mrkarlkarls/infra:latest
-            #остановка всех контейнеров
             sudo docker stop $(sudo docker ps -a -q)
             sudo docker run --rm -d -p 5000:5000 mrkarlkarls/infra:latest
